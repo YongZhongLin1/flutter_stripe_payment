@@ -62,7 +62,7 @@ class StripePayment {
   static Future<bool> _deviceSupportsApplePay() => _channel.invokeMethod("deviceSupportsApplePay");
 
   /// https://tipsi.github.io/tipsi-stripe/docs/paymentRequestWithNativePay.html
-  static Future<Token> paymentRequestWithNativePay(
+  static Future<AndroidPayToken> paymentRequestWithNativePay(
       {@required AndroidPayPaymentRequest androidPayOptions, @required ApplePayPaymentOptions applePayOptions}) {
     if (kIsWeb) {
       throw UnimplementedError();
@@ -76,15 +76,15 @@ class StripePayment {
     }
   }
 
-  static Future<Token> _paymentRequestWithAndroidPay(AndroidPayPaymentRequest options) async {
+  static Future<AndroidPayToken> _paymentRequestWithAndroidPay(AndroidPayPaymentRequest options) async {
     final token = await _channel.invokeMethod("paymentRequestWithAndroidPay", options.toJson());
-    return Token.fromJson(token);
+    return AndroidPayToken.fromJson(token);
   }
 
-  static Future<Token> _paymentRequestWithApplePay(ApplePayPaymentOptions options) async {
+  static Future<AndroidPayToken> _paymentRequestWithApplePay(ApplePayPaymentOptions options) async {
     final token = await _channel.invokeMethod("paymentRequestWithApplePay",
         {"options": options.json, "items": options.items.map((item) => item.json).toList()});
-    return Token.fromJson(token);
+    return AndroidPayToken.fromJson(token);
   }
 
   /// https://tipsi.github.io/tipsi-stripe/docs/completeNativePayRequest.html
@@ -122,15 +122,15 @@ class StripePayment {
   }
 
   /// https://tipsi.github.io/tipsi-stripe/docs/createTokenWithCard.html
-  static Future<Token> createTokenWithCard(CreditCard card) async {
+  static Future<AndroidPayToken> createTokenWithCard(CreditCard card) async {
     final token = await _channel.invokeMethod("createTokenWithCard", card.toJson());
-    return Token.fromJson(token);
+    return AndroidPayToken.fromJson(token);
   }
 
   /// https://tipsi.github.io/tipsi-stripe/docs/createTokenWithBankAccount.html
-  static Future<Token> createTokenWithBankAccount(BankAccount options) async {
+  static Future<AndroidPayToken> createTokenWithBankAccount(BankAccount options) async {
     final token = await _channel.invokeMethod("createTokenWithBankAccount", options.toJson());
-    return Token.fromJson(token);
+    return AndroidPayToken.fromJson(token);
   }
 
   /// https://tipsi.github.io/tipsi-stripe/docs/createsourcewithparamsparams.html
