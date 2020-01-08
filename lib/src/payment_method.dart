@@ -5,7 +5,7 @@ import 'card_form_payment_request.dart';
 class PaymentMethodRequest {
   final BillingAddress billingAddress;
   final CreditCard card;
-  final Token token;
+  final AndroidPayToken token;
   final Map<String, String> metadata;
 
   PaymentMethodRequest({this.billingAddress, this.card, this.token, this.metadata}) {
