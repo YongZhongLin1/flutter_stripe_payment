@@ -1,4 +1,4 @@
-class Token {
+class AndroidPayToken {
   BankAccount bankAccount;
   CreditCard card;
   double created;
@@ -7,8 +7,8 @@ class Token {
 
   Token({this.bankAccount, this.card, this.created, this.livemode, this.tokenId});
 
-  factory Token.fromJson(Map<dynamic, dynamic> json) {
-    return Token(
+  factory AndroidPayToken.fromJson(Map<dynamic, dynamic> json) {
+    return AndroidPayToken(
       bankAccount: json['bankAccount'] != null ? BankAccount.fromJson(json['bankAccount']) : null,
       card: json['card'] != null ? CreditCard.fromJson(json['card']) : null,
       created: json['created'] is int ? (json['created'] as int).toDouble() : json['created'],
